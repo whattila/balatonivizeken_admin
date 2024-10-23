@@ -33,12 +33,11 @@ class DashboardScreen extends ConsumerWidget {
               ],
               //TODO change to icon later
               title: const Text(
-                "Balatoni Vizeken",
+                "Balatoni Vizeken - adminisztrátor",
               ),
               automaticallyImplyLeading: false,
             );
           },
-
           bottomNavigationBuilder: (context, tabsRouter) {
             return BottomNavigationBar(
               currentIndex: tabsRouter.activeIndex,

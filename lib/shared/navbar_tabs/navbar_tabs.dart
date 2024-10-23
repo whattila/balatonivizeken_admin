@@ -16,6 +16,6 @@ final List<NavbarTabs> navbarTabs = [
   ),
   NavbarTabs(
     route: const BoatListRoute(),
-    bottomNavigationBarItem: const BottomNavigationBarItem(icon: Icon(Icons.directions_boat), label: 'No go zónák')
+    bottomNavigationBarItem: const BottomNavigationBarItem(icon: Icon(Icons.directions_boat), label: 'Hajók')
   )
 ];

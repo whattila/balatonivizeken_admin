@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:balatonivizeken_admin/shared/consts/screen_widths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../shared/consts/colors.dart';
@@ -60,30 +61,37 @@ class ForgotPasswordScreen extends ConsumerWidget {
   }
 
   Widget _body(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Spacer(),
-        _title(context),
-        const SizedBox(height: 16),
-        _subtitle(context),
-        const SizedBox(height: 16),
-        const Divider(color: BalatoniVizekenColors.lightGrey),
-        const SizedBox(height: 16),
-        _textField(
-          context,
-          controller: _emailController,
-          hintText: 'Email-cím',
-          //TODO hint text
-          autofillHints: ['Email-cím'],
-          textInputAction: TextInputAction.done,
+    return Center(  // A Column középre helyezése
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: BalatoniVizekenScreenWidths.medium,
         ),
-        const SizedBox(height: 16),
-        _forgotPasswordButton(context, ref),
-        const Spacer(),
-      ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Spacer(),
+            _title(context),
+            const SizedBox(height: 16),
+            _subtitle(context),
+            const SizedBox(height: 16),
+            const Divider(color: BalatoniVizekenColors.lightGrey),
+            const SizedBox(height: 16),
+            _textField(
+              context,
+              controller: _emailController,
+              hintText: 'Email-cím',
+              autofillHints: ['Email-cím'],
+              textInputAction: TextInputAction.done,
+            ),
+            const SizedBox(height: 16),
+            _forgotPasswordButton(context, ref),
+            const Spacer(),
+          ],
+        ),
+      ),
     );
   }
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

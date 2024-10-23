@@ -17,4 +17,17 @@ extension UserTypeExtension on UserType {
         throw ArgumentError('Unknown user type: $value');
     }
   }
+
+  String get displayName {
+    switch (this) {
+      case UserType.normal:
+        return "Hajós";
+      case UserType.lifeguard:
+        return "Vízimentő";
+      case UserType.admin:
+        return "Adminisztrátor";
+      default:
+        return "Nem létező hajótípus";
+    }
+  }
 }

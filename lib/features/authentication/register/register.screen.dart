@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:balatonivizeken_admin/features/authentication/register/providers/register.controller.dart';
+import 'package:balatonivizeken_admin/shared/consts/screen_widths.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -121,7 +122,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'A folytatással beleegyezel a következőkbe ',
+        text: 'A folytatással beleegyezel a következőkbe:\n ',
         style: const TextStyle(color: BalatoniVizekenColors.white),
         children: [
           TextSpan(
@@ -150,107 +151,107 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Widget _body(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Spacer(),
-        _title(context),
-        const SizedBox(height: 16),
-        AutofillGroup(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 8),
-              _textField(
-                context,
-                controller: _familyNameController,
-                hintText: 'Vezetéknév',
-                //TODO hint text
-                autofillHints: ['Vezetéknév'],
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(height: 16),
-              _textField(
-                context,
-                controller: _givenNameController,
-                hintText: 'Keresztnév',
-                //TODO hint text
-                autofillHints: ['Keresztnév'],
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(height: 16),
-              _textField(
-                context,
-                controller: _usernameController,
-                hintText: 'Felhasználónév',
-                //TODO hint text
-                autofillHints: ['Felhasználónév'],
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(height: 16),
-              _textField(
-                context,
-                controller: _emailController,
-                hintText: 'Email-cím',
-                //TODO hint text
-                autofillHints: ['Email-cím'],
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(height: 16),
-              _textField(
-                context,
-                controller: _phoneNumberController,
-                hintText: 'Telefonszám',
-                //TODO hint text
-                autofillHints: ['Telefonszám'],
-                textInputAction: TextInputAction.next,
-              ),
-              const SizedBox(height: 16),
-              _textField(
-                context,
-                controller: _passwordController,
-                hintText: 'Jelszó',
-                //TODO hint text
-                autofillHints: ['Jelszó'],
-                textInputAction: TextInputAction.next,
-                obscureText: true,
-              ),
-              const SizedBox(height: 16),
-              _textField(
-                context,
-                controller: _confirmPasswordController,
-                hintText: 'Jelszó megerősítés',
-                //TODO hint text
-                autofillHints: ['Jelszó megerősítés'],
-                textInputAction: TextInputAction.next,
-                obscureText: true,
-              ),
-              const SizedBox(height: 16),
-              _textField(
-                context,
-                controller: _invitationCodeController,
-                hintText: 'Ellenőrző kód',
-                //TODO hint text
-                autofillHints: ['Vizimentőként kapott ellenőrző kód'],
-                textInputAction: TextInputAction.done,
-                onSubmitted: (_) {
-                  if (_isValid) {
-                    _register(context);
-                  }
-                },
-                obscureText: true,
-              ),
-              const SizedBox(height: 16),
-              _termsAndConditions(context),
-            ],
-          ),
+    return Center(  // A Column középre igazításához
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: BalatoniVizekenScreenWidths.medium,
         ),
-        const SizedBox(height: 16),
-        _registerButton(context),
-        const Spacer(),
-      ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Spacer(),
+            _title(context),
+            const SizedBox(height: 16),
+            AutofillGroup(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 8),
+                  _textField(
+                    context,
+                    controller: _familyNameController,
+                    hintText: 'Vezetéknév',
+                    autofillHints: ['Vezetéknév'],
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+                  _textField(
+                    context,
+                    controller: _givenNameController,
+                    hintText: 'Keresztnév',
+                    autofillHints: ['Keresztnév'],
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+                  _textField(
+                    context,
+                    controller: _usernameController,
+                    hintText: 'Felhasználónév',
+                    autofillHints: ['Felhasználónév'],
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+                  _textField(
+                    context,
+                    controller: _emailController,
+                    hintText: 'Email-cím',
+                    autofillHints: ['Email-cím'],
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+                  _textField(
+                    context,
+                    controller: _phoneNumberController,
+                    hintText: 'Telefonszám',
+                    autofillHints: ['Telefonszám'],
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+                  _textField(
+                    context,
+                    controller: _passwordController,
+                    hintText: 'Jelszó',
+                    autofillHints: ['Jelszó'],
+                    textInputAction: TextInputAction.next,
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 16),
+                  _textField(
+                    context,
+                    controller: _confirmPasswordController,
+                    hintText: 'Jelszó megerősítés',
+                    autofillHints: ['Jelszó megerősítés'],
+                    textInputAction: TextInputAction.next,
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 16),
+                  _textField(
+                    context,
+                    controller: _invitationCodeController,
+                    hintText: 'Ellenőrző kód',
+                    autofillHints: ['Adminisztrátorként kapott ellenőrző kód'],
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (_) {
+                      if (_isValid) {
+                        _register(context);
+                      }
+                    },
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 16),
+                  _termsAndConditions(context),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            _registerButton(context),
+            const Spacer(),
+          ],
+        ),
+      ),
     );
   }
+
 
   bool _isLoading({
     required Option<Result<Option<void>, Object>> register,
@@ -278,7 +279,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     return loginLoading || registerLoading;
   }
 
-
   @override
   Widget build(BuildContext context) {
     ref.listen(registerControllerProvider, (_, next) {
@@ -299,6 +299,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
     final register = ref.watch(registerControllerProvider);
     final login = ref.watch(loginControllerProvider);
+
     return UnattachedScreensWrapper(
       isLoading: _isLoading(register: register, login: login),
       canPop: true,

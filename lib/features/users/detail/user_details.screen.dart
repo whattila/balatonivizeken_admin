@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/widgets/error_widget.dart';
 import '../../../shared/widgets/full_page_progress_indicator.dart';
 import '../../../shared/widgets/unattached_screens_wrapper.dart';
-import '../list/models/user.header.dart';
 import 'models/user_info.model.dart';
 
 @RoutePage()
@@ -41,44 +40,99 @@ class UserDetailsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start, // Balra igazított szövegek
-      children: [
-        const Center(
-          child: Text(
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, // Balra igazított szövegek
+        children: [
+          const Text(
             'Felhasználó Részletek', // Középen megjelenő cím
             style: TextStyle(
               fontSize: 24.0, // Nagyobb betűméret
               fontWeight: FontWeight.bold, // Vastag betűk
             ),
           ),
-        ),
-        const SizedBox(height: 20.0), // Kis hely az első szöveg alatt
-        Text(
-          'Felhasználó neve: ${user.username}', // UserInfoDto username attribútum
-          style: const TextStyle(fontSize: 16.0), // Normál méretű szöveg
-        ),
-        const SizedBox(height: 8.0),
-        Text(
-          'Családi név: ${user.familyName}', // UserInfoDto familyName attribútum
-          style: const TextStyle(fontSize: 16.0),
-        ),
-        const SizedBox(height: 8.0),
-        Text(
-          'Keresztnév: ${user.givenName}', // UserInfoDto givenName attribútum
-          style: const TextStyle(fontSize: 16.0),
-        ),
-        const SizedBox(height: 8.0),
-        Text(
-          'Telefonszám: ${user.phoneNumber}', // UserInfoDto phoneNumber attribútum
-          style: const TextStyle(fontSize: 16.0),
-        ),
-        const SizedBox(height: 8.0),
-        Text(
-          'E-mail cím: ${user.emailAddress}', // UserInfoDto emailAddress attribútum
-          style: const TextStyle(fontSize: 16.0),
-        ),
-      ],
+          const SizedBox(height: 20.0), // Kis hely az első szöveg alatt
+          Text.rich(
+            TextSpan(
+              children: [
+                const TextSpan(
+                  text: 'Felhasználó neve: ', // Vastag rész
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: user.username, // Normál rész
+                  style: const TextStyle(fontWeight: FontWeight.normal),
+                ),
+              ],
+            ),
+            style: const TextStyle(fontSize: 16.0), // Általános szövegstílus
+          ),
+          const SizedBox(height: 8.0),
+          Text.rich(
+            TextSpan(
+              children: [
+                const TextSpan(
+                  text: 'Családi név: ', // Vastag rész
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: user.familyName, // Normál rész
+                  style: const TextStyle(fontWeight: FontWeight.normal),
+                ),
+              ],
+            ),
+            style: const TextStyle(fontSize: 16.0),
+          ),
+          const SizedBox(height: 8.0),
+          Text.rich(
+            TextSpan(
+              children: [
+                const TextSpan(
+                  text: 'Keresztnév: ', // Vastag rész
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: user.givenName, // Normál rész
+                  style: const TextStyle(fontWeight: FontWeight.normal),
+                ),
+              ],
+            ),
+            style: const TextStyle(fontSize: 16.0),
+          ),
+          const SizedBox(height: 8.0),
+          Text.rich(
+            TextSpan(
+              children: [
+                const TextSpan(
+                  text: 'Telefonszám: ', // Vastag rész
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: user.phoneNumber, // Normál rész
+                  style: const TextStyle(fontWeight: FontWeight.normal),
+                ),
+              ],
+            ),
+            style: const TextStyle(fontSize: 16.0),
+          ),
+          const SizedBox(height: 8.0),
+          Text.rich(
+            TextSpan(
+              children: [
+                const TextSpan(
+                  text: 'E-mail cím: ', // Vastag rész
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: user.emailAddress, // Normál rész
+                  style: const TextStyle(fontWeight: FontWeight.normal),
+                ),
+              ],
+            ),
+            style: const TextStyle(fontSize: 16.0),
+          ),
+        ],
+      ),
     );
   }
 }

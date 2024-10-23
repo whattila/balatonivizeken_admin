@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:balatonivizeken_admin/features/authentication/login/providers/login.controller.dart';
+import 'package:balatonivizeken_admin/shared/consts/screen_widths.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,10 +21,20 @@ class LoginScreen extends ConsumerWidget {
   final _passwordController = TextEditingController();
 
   Widget _title(BuildContext context) {
-    return const Text(
-      'Üdv, újra!',
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+    return const Column(
+      children: [
+        Text(
+          'Balatoni Vizeken - admin felület',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 16),
+        Text(
+          'Üdv, újra!',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 
@@ -47,16 +58,17 @@ class LoginScreen extends ConsumerWidget {
   }
 
   Widget _forgotPassword(BuildContext context) {
-    return GestureDetector(
-        child: const Text(
-          'Elfelejtett jelszó?',
-          textAlign: TextAlign.right,
-          style: TextStyle(
-            decorationStyle: TextDecorationStyle.solid,
-            color: BalatoniVizekenColors.purple,
-          ),
-        ),
-        onTap: () => {context.router.push(ForgotPasswordRoute())});
+    return RichText(
+      textAlign: TextAlign.end,
+      text: TextSpan(
+        recognizer: TapGestureRecognizer()
+          ..onTap = () {
+            context.router.push(ForgotPasswordRoute());
+          },
+        text: 'Elfelejtett jelszó?',
+        style: const TextStyle(color: BalatoniVizekenColors.purple, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 
   void _signIn(BuildContext context, WidgetRef ref) {
@@ -92,7 +104,7 @@ class LoginScreen extends ConsumerWidget {
     );
   }
 
-  Widget _body(BuildContext context, WidgetRef ref) {
+  Widget _onePaneBody(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -138,6 +150,66 @@ class LoginScreen extends ConsumerWidget {
     );
   }
 
+  Widget _twoPaneBody(BuildContext context, WidgetRef ref) {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,  // Középre igazítja a _title-t
+            children: [
+              _title(context),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Spacer(),
+              const SizedBox(height: 16),
+              AutofillGroup(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _textField(
+                      context,
+                      controller: _usernameController,
+                      hintText: 'Felhasználónév',
+                      autofillHints: ['Felhasználónév'],
+                      textInputAction: TextInputAction.next,
+                    ),
+                    const SizedBox(height: 16),
+                    _textField(
+                      context,
+                      controller: _passwordController,
+                      hintText: 'Jelszó',
+                      autofillHints: ['Jelszó'],
+                      textInputAction: TextInputAction.done,
+                      onSubmitted: (value) => _signIn(context, ref),
+                      obscureText: true,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              _forgotPassword(context),
+              const SizedBox(height: 16),
+              _signInButton(context, ref),
+              const SizedBox(height: 8),
+              const LandingScreenDivider(),
+              const SizedBox(height: 8),
+              _getStarted(context),
+              const Spacer(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+
+
   Null _clearTextFields() {
     _usernameController.clear();
     _passwordController.clear();
@@ -171,6 +243,16 @@ class LoginScreen extends ConsumerWidget {
     });
 
     final login = ref.watch(loginControllerProvider);
-    return UnattachedScreensWrapper(isLoading: _isLoading(login: login), canPop: false, content: _body(context, ref));
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+
+    return UnattachedScreensWrapper(
+        isLoading: _isLoading(login: login),
+        canPop: false,
+        content: width < BalatoniVizekenScreenWidths.expanded ?
+          _onePaneBody(context, ref)
+          : _twoPaneBody(context, ref)
+    );
   }
 }
