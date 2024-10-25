@@ -120,59 +120,30 @@ class UserListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Stack(
-        children: [
-          Scrollbar(
-            child: ListView.builder(
-              itemCount: userList.length,
-              itemBuilder: (context, index) {
-                final item = userList[index];
-                return Card(
-                  child: ListTile(
-                    tileColor: BalatoniVizekenColors.grey,
-                    title: Text(
-                      item.username,
-                      style: const TextStyle(
-                        fontSize: 20.0, // Nagyobb betűméret
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      item.userType.displayName,
-                      style: const TextStyle(fontSize: 16.0),
-                    ),
-                    onTap: () => onUserSelected(item),
+      child: Scrollbar(
+        child: ListView.builder(
+          itemCount: userList.length,
+          itemBuilder: (context, index) {
+            final item = userList[index];
+            return Card(
+              child: ListTile(
+                tileColor: BalatoniVizekenColors.grey,
+                title: Text(
+                  item.username,
+                  style: const TextStyle(
+                    fontSize: 20.0, // Nagyobb betűméret
+                    fontWeight: FontWeight.bold,
                   ),
-                );
-              },
-            ),
-          ),
-          const UserRefreshButton(),
-        ],
-      ),
-    );
-  }
-}
-
-class UserRefreshButton extends ConsumerWidget {
-  const UserRefreshButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Positioned(
-      bottom: 10,
-      right: 10,
-      child: ElevatedButton(
-        onPressed: () {
-          ref.read(userListProvider.notifier).refreshUsers();
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: BalatoniVizekenColors.lightBlue,
-          foregroundColor: Colors.white,
-          shape: const CircleBorder(),
-          padding: const EdgeInsets.all(20),
+                ),
+                subtitle: Text(
+                  item.userType.displayName,
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+                onTap: () => onUserSelected(item),
+              ),
+            );
+          },
         ),
-        child: const Text('FRISSÍTÉS'),
       ),
     );
   }

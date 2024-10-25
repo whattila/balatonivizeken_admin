@@ -5,6 +5,7 @@ import '../../shared/consts/colors.dart';
 import '../../shared/navbar_tabs/navbar_tabs.dart';
 import '../../shared/repositories/user_storage/providers/user_storage.provider.dart';
 import '../../shared/router/router.dart';
+import '../storm/storm_dialog.dart';
 
 @RoutePage()
 class DashboardScreen extends ConsumerWidget {
@@ -51,6 +52,19 @@ class DashboardScreen extends ConsumerWidget {
               items: navbarTabs.map((tab) => tab.bottomNavigationBarItem).toList(),
             );
           },
+          floatingActionButton: FloatingActionButton.extended(
+            tooltip: 'Viharjelzés küldése',
+            foregroundColor: BalatoniVizekenColors.white,
+            backgroundColor: BalatoniVizekenColors.red,
+            hoverColor: BalatoniVizekenColors.lightRed,
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (BuildContext context) => const StormDialog(),
+              );
+            },
+            label: const Text('Viharjelzés küldése')
+          ),
         ),
       ],
     );
