@@ -4,6 +4,8 @@ import '../../../features/authentication/login/models/login.model.dart';
 import '../../../features/authentication/register/models/registration.model.dart';
 import '../../../features/boat/detail/models/boat.model.dart';
 import '../../../features/boat/list/models/boat.header.dart';
+import '../../../features/no_go_zone/models/input/no_go_zone_input.dto.dart';
+import '../../../features/no_go_zone/models/no_go_zone.dart';
 import '../../../features/storm/models/storm_input.dart';
 import '../../../features/users/detail/models/user_info.model.dart';
 import '../../../features/users/list/models/user.header.dart';
@@ -44,5 +46,18 @@ abstract class BalatoniVizekenClient {
   @POST('/storm/new')
   Future<void> createStorm({
     @Body() required StormInputDto stormInputDto
+  });
+  
+  @POST('/zone/update')
+  Future<NoGoZone> createOrUpdateNoGoZone({
+    @Body() required NoGoZoneInputDto noGoZoneInputDto
+  });
+
+  @GET('/zone')
+  Future<List<NoGoZone>> getNoGoZones();
+  
+  @DELETE('/zone/delete/{id}')
+  Future<void> deleteNoGoZone({
+    @Path() required String id
   });
 }

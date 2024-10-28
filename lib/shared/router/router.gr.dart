@@ -53,6 +53,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: LoginScreen(key: args.key),
       );
     },
+    NoGoZoneRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const NoGoZoneScreen(),
+      );
+    },
     RegisterRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -199,6 +205,20 @@ class LoginRouteArgs {
   String toString() {
     return 'LoginRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [NoGoZoneScreen]
+class NoGoZoneRoute extends PageRouteInfo<void> {
+  const NoGoZoneRoute({List<PageRouteInfo>? children})
+      : super(
+          NoGoZoneRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NoGoZoneRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

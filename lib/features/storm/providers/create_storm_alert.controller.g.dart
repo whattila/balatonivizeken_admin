@@ -7,7 +7,7 @@ part of 'create_storm_alert.controller.dart';
 // **************************************************************************
 
 String _$createStormAlertControllerHash() =>
-    r'3be5395705599ef0641e82b05e5388a6bebee9f1';
+    r'283597a9cfa34a1e022e88c09c7d1003be188509';
 
 /// See also [CreateStormAlertController].
 @ProviderFor(CreateStormAlertController)
