@@ -26,12 +26,12 @@ class BoatDetailsScreen extends ConsumerWidget {
       isLoading: false,
       canPop: true,
       content: boatInfo.when(
-          data: (data) => BoatDetailsBody(boat: data),
-          error: (error, stackTrace) => const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: NetworkErrorWidget(errorMessage: 'Probléma a betöltésnél',),
-          ),
-          loading: () => const FullPageProgressIndicator()
+        data: (data) => BoatDetailsBody(boat: data),
+        error: (error, stackTrace) => const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: NetworkErrorWidget(errorMessage: 'Probléma a betöltésnél',),
+        ),
+        loading: () => const FullPageProgressIndicator()
       ),
     );
   }
@@ -102,6 +102,18 @@ class BoatDetailsBody extends StatelessWidget {
                 height: 30,
               ),
             ],
+          ),
+          const SizedBox(height: 8.0), // Kis hely a sorok között
+          RichText(
+            textAlign: TextAlign.end,
+            text: TextSpan(
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  context.router.push(UserDetailsRoute(userId: boat.userId));
+                },
+              text: 'Tulajdonos adatainak megtekintése',
+              style: const TextStyle(color: BalatoniVizekenColors.purple, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
