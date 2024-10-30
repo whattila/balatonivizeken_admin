@@ -96,31 +96,36 @@ class _NoGoZoneScreenState extends ConsumerState<NoGoZoneScreen> {
       tooltip: 'Véglegesítés',
       child: const Icon(Icons.check),
       onPressed: () {
-        final newPolygon = Polygon<HitValue>(
-            borderColor: Colors.red,
-            borderStrokeWidth: 3,
-            pattern: const StrokePattern.dotted(),
-            color: const Color.fromRGBO(244, 67, 54, 0.2),
-            points: _copyPointsList(editedPolygon!.points),
-            hitValue: screenState == NoGoZoneScreenState.modifying ?
-            editedPolygon?.hitValue as HitValue
+        if (editedPolygon!.points.isNotEmpty) {
+          final newPolygon = Polygon<HitValue>(
+              borderColor: Colors.red,
+              borderStrokeWidth: 3,
+              pattern: const StrokePattern.dotted(),
+              color: const Color.fromRGBO(244, 67, 54, 0.2),
+              points: _copyPointsList(editedPolygon!.points),
+              hitValue: screenState == NoGoZoneScreenState.modifying ?
+                editedPolygon?.hitValue as HitValue
                 : (id: null, index: index)
-        );
+          );
 
-        setState(() {
-            if (screenState == NoGoZoneScreenState.creating) {
-              index++;
-            }
-            polygons.add(newPolygon);
-            screenState = NoGoZoneScreenState.viewing;
-            editedPolygon = null;
-            polyEditor = null;
-        });
+          setState(() {
+              if (screenState == NoGoZoneScreenState.creating) {
+                index++;
+              }
+              polygons.add(newPolygon);
+              screenState = NoGoZoneScreenState.viewing;
+              editedPolygon = null;
+              polyEditor = null;
+          });
 
-        ref.read(noGoZoneControllerProvider.notifier).createOrUpdateNoGoZone(
-          id: newPolygon.hitValue!.id,
-          zonePoints: newPolygon.points.map((point) => LocationDto(latitude: point.latitude, longitude: point.longitude)).toList()
-        );
+          ref.read(noGoZoneControllerProvider.notifier).createOrUpdateNoGoZone(
+            id: newPolygon.hitValue!.id,
+            zonePoints: newPolygon.points.map((point) => LocationDto(latitude: point.latitude, longitude: point.longitude)).toList()
+          );
+        }
+        else {
+          Snack.show(context, text: 'Adjon hozzá pontokat a zónához');
+        }
       },
     );
   }
