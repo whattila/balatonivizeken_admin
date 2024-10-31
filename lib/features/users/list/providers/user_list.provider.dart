@@ -31,15 +31,8 @@ class UserList extends _$UserList {
       const Duration(minutes: 1),
       (timer) async {
         print('USER UPDATE STARTED');
-        final userHeaders = await api.getAllUsers();
-
-        state = state.when(
-          data: (data) {
-            return AsyncValue.data(userHeaders);
-          },
-          error: AsyncValue.error,
-          loading: AsyncValue.loading,
-        );
+        state = const AsyncLoading();
+        state = await AsyncValue.guard(api.getAllUsers);
       },
     );
   }

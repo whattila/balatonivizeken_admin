@@ -30,15 +30,8 @@ class BoatList extends _$BoatList {
       const Duration(minutes: 1),
       (timer) async {
         print('BOAT UPDATE STARTED');
-        final boatHeaders = await api.getBoatHeaders();
-
-        state = state.when(
-          data: (data) {
-            return AsyncValue.data(boatHeaders);
-          },
-          error: AsyncValue.error,
-          loading: AsyncValue.loading,
-        );
+        state = const AsyncLoading();
+        state = await AsyncValue.guard(api.getBoatHeaders);
       },
     );
   }
