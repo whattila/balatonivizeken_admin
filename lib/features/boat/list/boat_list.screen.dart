@@ -29,10 +29,10 @@ class _BoatListScreenState extends ConsumerState<BoatListScreen> {
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(boatListProvider.notifier).refreshBoats();
     });
-    super.initState();
   }
 
   @override

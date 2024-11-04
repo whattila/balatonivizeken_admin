@@ -31,10 +31,10 @@ class _UserListScreenState extends ConsumerState<UserListScreen> {
 
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(userListProvider.notifier).refreshUsers();
     });
-    super.initState();
   }
 
   @override
