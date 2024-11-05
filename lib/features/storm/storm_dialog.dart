@@ -104,7 +104,7 @@ class _StormDialogState extends ConsumerState<StormDialog> {
     );
   }
 
-  TextButton _sendButton(BuildContext context) {
+  Widget _sendButton(BuildContext context) {
     final sendStatus = ref.watch(createStormAlertControllerProvider);
     return TextButton(
       onPressed: sendStatus.isLoading ?
