@@ -14,6 +14,7 @@ import '../../../shared/widgets/full_page_progress_indicator.dart';
 import '../detail/user_details.screen.dart';
 import 'models/user.header.dart';
 
+// TODO test: létrehozzuk a nézetet, majd 1 perccel később újra létrehozzuk. Közben a UserListbe berakunk egy új elemet, megnézzük, hogy ennek megfelelően változott-e a UI?
 @RoutePage()
 class UserListScreen extends ConsumerStatefulWidget {
   const UserListScreen({super.key});
@@ -99,7 +100,7 @@ class UsersView extends ConsumerWidget {
       return UserListView(
         userList: userList,
         onUserSelected: (user) {
-          context.router.push(UserDetailsRoute(userId: selectedUser!.id!));
+          context.router.push(UserDetailsRoute(userId: user.id!));
         },
       );
     }

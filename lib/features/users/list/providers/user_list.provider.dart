@@ -10,6 +10,7 @@ import '../models/user.header.dart';
 
 part 'user_list.provider.g.dart';
 
+// TODO test: létrehozás után egyenlő lesz-e a state az api.getAllUsers() visszatérési értékével? a refreshUsers futása után 1 perccel történik-e api.getAllUsers hívás?
 @riverpod
 class UserList extends _$UserList {
   @override

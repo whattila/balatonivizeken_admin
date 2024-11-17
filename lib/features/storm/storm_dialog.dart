@@ -10,6 +10,7 @@ import '../../shared/consts/storm_station_list.dart';
 import '../../shared/widgets/snack.dart';
 import 'models/storm_degree.enum.dart';
 
+// TODO test: itt csinálhatnánk esetleg egy részletesebb manuális tesztelést
 class StormDialog extends ConsumerStatefulWidget {
   const StormDialog({super.key});
 

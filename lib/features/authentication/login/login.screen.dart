@@ -231,9 +231,9 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(loginControllerProvider, (_, next) {
       next.map(
-            (value) => value.map(
-              (option) => option.map(
-                (userDto) {
+        (value) => value.map(
+          (option) => option.map(
+            (userDto) {
               _clearTextFields();
               context.router.replaceAll([const DashboardRoute()]);
             },

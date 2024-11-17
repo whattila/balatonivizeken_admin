@@ -283,9 +283,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   Widget build(BuildContext context) {
     ref.listen(registerControllerProvider, (_, next) {
       next.map(
-            (value) => value.map(
-              (option) => option.map(
-                (_) {
+        (value) => value.map(
+          (option) => option.map(
+            (_) {
               Snack.show(context, text: 'Sikeres regisztráció! Jelentkezzen be a létrehozott felhasználójával!');
               context.router.replaceAll([LoginRoute()]);
             },
@@ -294,7 +294,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           // TODO: itt mit lenne érdemes csinálni?
         }()),  // Ha hiba van (Err), ide jön a hibakezelés
       ).unwrapOr(null);  // Ha nincs érték (None), nem történik semmi
-
     });
 
     final register = ref.watch(registerControllerProvider);

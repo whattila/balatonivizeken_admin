@@ -9,6 +9,7 @@ import '../../../../shared/widgets/snack.dart';
 
 part 'boat_list.provider.g.dart';
 
+// TODO test: létrehozás után egyenlő lesz-e a state az api.getBoatHeaders() visszatérési értékével? a refreshBoats futása után 1 perccel történik-e api.getBoatHeaders hívás?
 @riverpod
 class BoatList extends _$BoatList {
   @override

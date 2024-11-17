@@ -10,6 +10,7 @@ import '../models/no_go_zone.dart';
 
 part 'no_go_zone.controller.g.dart';
 
+// TODO test: a createOrUpdateNoGoZone és a deleteNoGoZone futása után a state tartalmazza illetve nem tartalmazza-e az új elemet?
 @riverpod
 class NoGoZoneController extends _$NoGoZoneController {
   @override

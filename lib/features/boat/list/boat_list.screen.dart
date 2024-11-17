@@ -12,6 +12,7 @@ import '../../../shared/widgets/error_widget.dart';
 import '../../../shared/widgets/full_page_progress_indicator.dart';
 import '../detail/boat_details_screen.dart';
 
+// TODO test: létrehozzuk a nézetet, majd 1 perccel később újra létrehozzuk. Közben a BoatListbe berakunk egy új elemet, megnézzük, hogy ennek megfelelően változott-e a UI?
 @RoutePage()
 class BoatListScreen extends ConsumerStatefulWidget {
   const BoatListScreen({super.key});
