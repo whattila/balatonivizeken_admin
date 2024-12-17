@@ -1,7 +1,5 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:balatonivizeken_admin/features/no_go_zone/models/location/location.dto.dart';
 import 'package:balatonivizeken_admin/features/no_go_zone/providers/polygon.provider.dart';
 import 'package:balatonivizeken_admin/features/no_go_zone/types.dart';
@@ -42,7 +40,7 @@ class _NoGoZoneScreenState extends ConsumerState<NoGoZoneScreen> {
   Widget build(BuildContext context) {
     final polygonsFromProvider = ref.watch(polygonListProvider);
     if ( ! polygonsFromProvider.hasError && polygonsFromProvider.hasValue) {
-      polygons = polygonsFromProvider.value!.toList();
+      polygons = polygonsFromProvider.value!;
       index = polygonsFromProvider.value!.length;
     }
 
@@ -65,7 +63,7 @@ class _NoGoZoneScreenState extends ConsumerState<NoGoZoneScreen> {
       children: [
         if (screenState == NoGoZoneScreenState.viewing)
           _addFAB(),
-        if ( ! (screenState == NoGoZoneScreenState.viewing))
+        if (screenState != NoGoZoneScreenState.viewing)
           _confirmFAB(),
         if (screenState == NoGoZoneScreenState.creating)
           const SizedBox(
@@ -159,7 +157,7 @@ class _NoGoZoneScreenState extends ConsumerState<NoGoZoneScreen> {
   Widget _noGoZonesMap() {
     return FlutterMap(
       options: MapOptions(
-        onTap: !(screenState == NoGoZoneScreenState.viewing) ?
+        onTap: screenState != NoGoZoneScreenState.viewing ?
             (_, ll) {
               polyEditor?.add(polyEditor!.points, ll);
             }
@@ -233,12 +231,12 @@ class _NoGoZoneScreenState extends ConsumerState<NoGoZoneScreen> {
             ),
           ),
         ),
-        if ( ! (screenState == NoGoZoneScreenState.viewing))
+        if (screenState != NoGoZoneScreenState.viewing)
           PolygonLayer(
             simplificationTolerance: 0,
             polygons: [if (editedPolygon!.points.isNotEmpty) editedPolygon!],
           ),
-        if ( ! (screenState == NoGoZoneScreenState.viewing))
+        if (screenState != NoGoZoneScreenState.viewing)
           DragMarkers(markers: polyEditor!.edit()),
       ],
     );
